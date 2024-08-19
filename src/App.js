@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Student Wellness Tracker</h1>
+      {/* <h1>Student Wellness Tracker</h1> */}
       <SurveyForm />
       <MoodChart data={sampleData} />
     </div>
