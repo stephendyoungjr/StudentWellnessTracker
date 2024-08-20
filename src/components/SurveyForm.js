@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import './SurveyForm.css';
 
 const SurveyForm = ({ onSubmit }) => {
@@ -9,8 +10,10 @@ const SurveyForm = ({ onSubmit }) => {
     gpa: 0.0,
     extracurricular: false,
     extracurricularHours: 0,
-    date: new Date().toISOString().split('T')[0], // Add a date field to track the entry date
+    date: new Date().toISOString().split('T')[0],
   });
+
+  const [activePeriod, setActivePeriod] = useState('day'); // State for tracking the active period
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -18,6 +21,10 @@ const SurveyForm = ({ onSubmit }) => {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
+  };
+
+  const handlePeriodClick = (period) => {
+    setActivePeriod(period);
   };
 
   const handleSubmit = (e) => {
@@ -38,6 +45,32 @@ const SurveyForm = ({ onSubmit }) => {
     <div className="survey-container">
       <form onSubmit={handleSubmit} className="survey-form">
         <h1 className="survey-title">Student Wellness Tracker</h1>
+
+        {/* Period Selection */}
+        <div className="period-selector">
+          <button
+            type="button"
+            className={`period-button ${activePeriod === 'day' ? 'active' : ''}`}
+            onClick={() => handlePeriodClick('day')}
+          >
+            Day
+          </button>
+          <button
+            type="button"
+            className={`period-button ${activePeriod === 'week' ? 'active' : ''}`}
+            onClick={() => handlePeriodClick('week')}
+          >
+            Week
+          </button>
+          <button
+            type="button"
+            className={`period-button ${activePeriod === 'year' ? 'active' : ''}`}
+            onClick={() => handlePeriodClick('year')}
+          >
+            Year
+          </button>
+        </div>
+
         <div className="form-group">
           <label>Mood:</label>
           <select name="mood" value={formData.mood} onChange={handleChange} className="form-control">

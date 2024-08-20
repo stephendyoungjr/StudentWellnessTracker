@@ -78,3 +78,32 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);  /* Reduced shadow on click */
   transform: translateY(1px);  /* Slight press down effect */
 }
+
+/* Period Selector Styles */
+.period-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.period-button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.period-button.active {
+  background-color: #0073e6;
+  color: white;
+}
+
+.period-button:hover {
+  background-color: #0073e6;
+  color: white;
+}
+  
