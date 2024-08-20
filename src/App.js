@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   const [surveyData, setSurveyData] = useState([]);
 
-  const calculateBurnoutScore = (entry) => {
+  const calculateBurnoutScore = (entry, previousEntry) => {
     let moodScore = 0;
     switch (entry.mood) {
       case 'Happy':
@@ -27,16 +27,23 @@ function App() {
         moodScore = 2;
     }
 
-    const homeworkScore = entry.homeworkHours * 0.5; // Higher weight for more homework
-    const extracurricularScore = entry.extracurricularHours * 0.3; // Weight for extracurricular hours
-    const gpaScore = entry.gpa >= 3.5 ? 2 : 1; // Higher GPA adds to burnout likelihood
+    const homeworkScore = entry.homeworkHours * 0.5;
+    const extracurricularScore = entry.extracurricularHours * 0.3;
+    const gpaScore = entry.gpa >= 3.5 ? 2 : 1;
 
-    // Total burnout score combining all factors
-    return moodScore + homeworkScore + extracurricularScore + gpaScore;
+    let burnoutScore = moodScore + homeworkScore + extracurricularScore + gpaScore;
+
+    // Check if the previous entry was a burnout
+    if (previousEntry && previousEntry.burnoutScore >= 10) {
+      burnoutScore = Math.max(burnoutScore, previousEntry.burnoutScore - 0.5); // Gradually decrease burnout
+    }
+
+    return burnoutScore;
   };
 
   const handleFormSubmit = (formData) => {
-    const burnoutScore = calculateBurnoutScore(formData);
+    const previousEntry = surveyData[surveyData.length - 1];
+    const burnoutScore = calculateBurnoutScore(formData, previousEntry);
     setSurveyData([...surveyData, { ...formData, burnoutScore }]);
   };
 

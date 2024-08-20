@@ -10,8 +10,10 @@ import {
   Tooltip,
   Legend,
   Filler,
+  TimeScale,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import 'chartjs-adapter-date-fns'; // Import date adapter for time scale
 
 ChartJS.register(
   CategoryScale,
@@ -22,6 +24,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   Filler,
+  TimeScale,
   annotationPlugin
 );
 
@@ -29,12 +32,45 @@ const MoodChart = ({ data }) => {
   const [timeScale, setTimeScale] = useState('days'); // Default time scale
 
   const getChartData = (scale) => {
+    let range;
+    switch (scale) {
+      case 'weeks':
+        range = 30; // Show a month (30 days)
+        break;
+      case 'months':
+        range = 365; // Show a year (365 days)
+        break;
+      default:
+        range = 14; // Show 2 weeks (14 days)
+    }
+
+    const chartData = [];
+    for (let i = -range / 2; i <= range / 2; i++) {
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + i);
+
+      const dateStr = currentDate.toISOString().split('T')[0];
+
+      const entry = data.find((entry) => entry.date === dateStr);
+      let burnoutScore = entry ? entry.burnoutScore : null;
+
+      if (!burnoutScore && i > 0 && chartData.length > 0) {
+        const previousScore = chartData[chartData.length - 1].burnoutScore;
+        burnoutScore = Math.max(previousScore - 0.5, 0); // Gradual recovery
+      }
+
+      chartData.push({
+        date: dateStr,
+        burnoutScore: burnoutScore || 0,
+      });
+    }
+
     return {
-      labels: data.map(entry => entry.date),
+      labels: chartData.map((entry) => entry.date),
       datasets: [
         {
           label: 'Burnout Likelihood Over Time',
-          data: data.map(entry => entry.burnoutScore),
+          data: chartData.map((entry) => entry.burnoutScore),
           fill: 'start',
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgb(255, 99, 132)',
@@ -59,6 +95,10 @@ const MoodChart = ({ data }) => {
         title: {
           display: true,
           text: 'Date',
+        },
+        type: 'time', // Use the time scale here
+        time: {
+          unit: timeScale === 'days' ? 'day' : timeScale === 'weeks' ? 'week' : 'month',
         },
       },
     },
@@ -89,16 +129,16 @@ const MoodChart = ({ data }) => {
               backgroundColor: 'rgba(255, 165, 0, 0.7)',
             },
           },
-          ...data.reduce((annotations, entry, index) => {
-            if (entry.burnoutScore >= 10) {
+          ...chartData.datasets[0].data.reduce((annotations, score, index) => {
+            if (score >= 10) {
               annotations[`burnoutPoint${index}`] = {
                 type: 'point',
-                xValue: entry.date,
-                yValue: entry.burnoutScore,
+                xValue: chartData.labels[index],
+                yValue: score,
                 backgroundColor: 'rgb(255, 99, 132)',
                 radius: 5,
                 label: {
-                  content: `Burnout Risk on ${entry.date}`,
+                  content: `Burnout Risk on ${chartData.labels[index]}`,
                   enabled: true,
                   position: 'top',
                 },
