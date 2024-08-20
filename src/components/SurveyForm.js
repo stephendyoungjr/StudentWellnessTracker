@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SurveyForm.css';
 
-const SurveyForm = () => {
+const SurveyForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     mood: '',
     ateWell: false,
@@ -9,6 +9,7 @@ const SurveyForm = () => {
     gpa: 0.0,
     extracurricular: false,
     extracurricularHours: 0,
+    date: new Date().toISOString().split('T')[0], // Add a date field to track the entry date
   });
 
   const handleChange = (e) => {
@@ -21,7 +22,16 @@ const SurveyForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    onSubmit(formData);
+    setFormData({
+      mood: '',
+      ateWell: false,
+      homeworkHours: 0,
+      gpa: 0.0,
+      extracurricular: false,
+      extracurricularHours: 0,
+      date: new Date().toISOString().split('T')[0],
+    });
   };
 
   return (
@@ -30,7 +40,15 @@ const SurveyForm = () => {
         <h1 className="survey-title">Student Wellness Tracker</h1>
         <div className="form-group">
           <label>Mood:</label>
-          <input type="text" name="mood" value={formData.mood} onChange={handleChange} className="form-control" />
+          <select name="mood" value={formData.mood} onChange={handleChange} className="form-control">
+            <option value="">Select your mood</option>
+            <option value="Happy">Happy</option>
+            <option value="Sad">Sad</option>
+            <option value="Tired">Tired</option>
+            <option value="Angry">Angry</option>
+            <option value="Depressed">Depressed</option>
+            <option value="Neutral">Neutral</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Ate Well Today:</label>
