@@ -153,10 +153,25 @@ const MoodChart = ({ data }) => {
 
   return (
     <div>
-      <div>
-        <button onClick={() => setTimeScale('days')}>Days</button>
-        <button onClick={() => setTimeScale('weeks')}>Weeks</button>
-        <button onClick={() => setTimeScale('months')}>Months</button>
+      <div className="period-selector">
+        <button
+          className={`period-button ${timeScale === 'days' ? 'active' : ''}`}
+          onClick={() => setTimeScale('days')}
+        >
+          Days
+        </button>
+        <button
+          className={`period-button ${timeScale === 'weeks' ? 'active' : ''}`}
+          onClick={() => setTimeScale('weeks')}
+        >
+          Weeks
+        </button>
+        <button
+          className={`period-button ${timeScale === 'months' ? 'active' : ''}`}
+          onClick={() => setTimeScale('months')}
+        >
+          Months
+        </button>
       </div>
       <Line data={chartData} options={options} />
     </div>
