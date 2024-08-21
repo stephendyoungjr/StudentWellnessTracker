@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SurveyForm from './components/SurveyForm';
 import MoodChart from './components/MoodChart';
+import Chatbox from './components/Chatbox'; // Import the Chatbox component
 import './App.css';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
     <div className="App">
       <SurveyForm onSubmit={handleFormSubmit} />
       <MoodChart data={surveyData} />
+      <Chatbox submittedData={surveyData} /> {/* Pass surveyData to Chatbox */}
     </div>
   );
 }
