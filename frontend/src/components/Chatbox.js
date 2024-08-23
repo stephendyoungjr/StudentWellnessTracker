@@ -24,15 +24,6 @@ const Chatbox = ({ submittedData }) => {
         ],
       });
 
-//       const apiResponse = await axios.post('http://localhost:5001/api/chat', {  // Change 5000 to 5001 or your new port
-//   messages: [
-//     { role: 'system', content: 'You are a helpful assistant.' },
-//     { role: 'user', content: `User's data: ${JSON.stringify(submittedData)}` },
-//     { role: 'user', content: input },
-//   ],
-// });
-
-
       setResponse(apiResponse.data.choices[0].message.content);
     } catch (error) {
       console.error('Error fetching response:', error);
@@ -46,6 +37,7 @@ const Chatbox = ({ submittedData }) => {
     <div className="chatbox-container">
       <div className="chatbox">
         <div className="chatbox-response">
+          <img src="/1698535.png" alt="Robot Icon" className="chatbox-icon" />
           {loading ? 'Loading...' : response}
         </div>
         <form onSubmit={handleSubmit} className="chatbox-form">
