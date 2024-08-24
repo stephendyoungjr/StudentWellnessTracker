@@ -16,15 +16,13 @@ const Chatbox = ({ submittedData }) => {
     setLoading(true);
 
     try {
-      const apiResponse = await axios.post('http://localhost:5001/api/chat', {
+      const apiResponse = await axios.post('/api/chat', {
         messages: [
           { role: 'system', content: 'You are a helpful assistant.' },
           { role: 'user', content: `User's data: ${JSON.stringify(submittedData)}` },
           { role: 'user', content: input },
         ],
       });
-
-      //SET REPONSE
 
       setResponse(apiResponse.data.choices[0].message.content);
     } catch (error) {
