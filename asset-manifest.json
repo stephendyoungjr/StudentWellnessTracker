@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/StudentWellnessTracker/static/css/main.ba451e6b.css",
-    "main.js": "/StudentWellnessTracker/static/js/main.0e041f90.js",
-    "static/js/453.b693ea37.chunk.js": "/StudentWellnessTracker/static/js/453.b693ea37.chunk.js",
-    "index.html": "/StudentWellnessTracker/index.html",
-    "main.ba451e6b.css.map": "/StudentWellnessTracker/static/css/main.ba451e6b.css.map",
-    "main.0e041f90.js.map": "/StudentWellnessTracker/static/js/main.0e041f90.js.map",
-    "453.b693ea37.chunk.js.map": "/StudentWellnessTracker/static/js/453.b693ea37.chunk.js.map"
+    "main.css": "/static/css/main.fdfc98ba.css",
+    "main.js": "/static/js/main.6f8ab901.js",
+    "static/js/453.10678253.chunk.js": "/static/js/453.10678253.chunk.js",
+    "index.html": "/index.html",
+    "main.fdfc98ba.css.map": "/static/css/main.fdfc98ba.css.map",
+    "main.6f8ab901.js.map": "/static/js/main.6f8ab901.js.map",
+    "453.10678253.chunk.js.map": "/static/js/453.10678253.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba451e6b.css",
-    "static/js/main.0e041f90.js"
+    "static/css/main.fdfc98ba.css",
+    "static/js/main.6f8ab901.js"
   ]
 }
