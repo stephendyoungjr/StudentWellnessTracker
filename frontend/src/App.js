@@ -56,5 +56,5 @@ function App() {
     </div>
   );
 }
-
+//add function for new page
 export default App;
