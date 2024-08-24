@@ -24,6 +24,8 @@ const Chatbox = ({ submittedData }) => {
         ],
       });
 
+      //SET REPONSE
+
       setResponse(apiResponse.data.choices[0].message.content);
     } catch (error) {
       console.error('Error fetching response:', error);
