@@ -39,7 +39,7 @@ const Chatbox = ({ submittedData }) => {
     <div className="chatbox-container">
       <div className="chatbox">
         <div className="chatbox-response">
-          <img src="/1698535.png" alt="Robot Icon" className="chatbox-icon" />
+          <img src="/3662817.png" alt="Robot Icon" className="chatbox-icon" />
           {loading ? 'Loading...' : response}
         </div>
         <form onSubmit={handleSubmit} className="chatbox-form">
