@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SurveyForm from './components/SurveyForm';
 import MoodChart from './components/MoodChart';
-import Chatbox from './components/Chatbox'; // Import the Chatbox component
+import Chatbox from 'src/components/Chatbox';
 import './App.css';
 
 function App() {
