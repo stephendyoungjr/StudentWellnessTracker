@@ -1,59 +1,91 @@
-/* Chatbox.css */
 .chatbox-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    z-index: 1000;
-  }
-  
-  .chatbox {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-  
-  .chatbox-response {
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    min-height: 50px;
-    overflow-y: auto;
-    max-height: 150px;
-  }
-  
-  .chatbox-form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .chatbox-input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 5px;
-  }
-  
-  .chatbox-submit {
-    padding: 8px 12px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .chatbox-submit:hover {
-    background-color: #005bb5;
-  }
-  
-  .chatbox-icon{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 100%;
+  max-width: 300px;
+  z-index: 1000;
+}
+
+.chatbox {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.chatbox-response {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-height: 50px;
+  overflow-y: auto;
+  max-height: 150px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f9f9f9;
+}
+
+/* Custom scrollbar */
+.chatbox-response::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox-response::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.chatbox-form {
+  display: flex;
+  align-items: center;
+}
+
+.chatbox-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.chatbox-input:focus {
+  border-color: #0073e6;
+  outline: none;
+}
+
+.chatbox-submit {
+  padding: 8px 12px;
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chatbox-submit:hover {
+  background-color: #005bb5;
+}
+
+.chatbox-submit:focus {
+  outline: none;
+  background-color: #004494;
+}
+
+.chatbox-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
