@@ -8,6 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log(process.env.OPENAI_API_KEY)
+
+
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.post('/api/chat', async (req, res) => {
