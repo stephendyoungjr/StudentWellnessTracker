@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SurveyForm from './components/SurveyForm';
 import MoodChart from './components/MoodChart';
-import Chatbox from './components/Chatbox';
+import ChatboxComponent from './components/ChatboxComponent'; // Updated import
 
 import './App.css';
 
@@ -53,9 +53,9 @@ function App() {
     <div className="App">
       <SurveyForm onSubmit={handleFormSubmit} />
       <MoodChart data={surveyData} />
-      <Chatbox submittedData={surveyData} /> {/* Pass surveyData to Chatbox */}
+      <ChatboxComponent submittedData={surveyData} /> {/* Updated component usage */}
     </div>
   );
 }
-//add function for new page
+
 export default App;
